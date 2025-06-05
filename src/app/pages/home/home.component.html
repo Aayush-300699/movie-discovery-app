@@ -1,0 +1,47 @@
+<div class="header-container">
+    <h1 class="title">What Should I Watch Tonight?</h1>
+    <p class="subtitle">Select a mood to discover movies or search for your favorite!</p>
+</div>
+
+<div class="top-controls">
+    <div class="search-group">
+        <input type="text" placeholder="Search movies..." [(ngModel)]="searchTerm" (keyup.enter)="searchMovies()"
+            class="search-input" />
+        <button (click)="searchMovies()" class="btn btn-primary">Search</button>
+    </div>
+
+    <button (click)="goToWatchlist()" class="btn btn-secondary watchlist-btn">
+        📺 Go to Watchlist
+    </button>
+
+</div>
+
+<div class="button-group">
+    <button (click)="getMoviesByMood('35')" class="btn btn-mood">😊 Feel Good</button>
+    <button (click)="getMoviesByMood('28')" class="btn btn-mood">💥 Action Fix</button>
+    <button (click)="getMoviesByMood('9648')" class="btn btn-mood">🧠 Mind Benders</button>
+</div>
+
+<div *ngIf="loading" class="loading-text">Loading movies...</div>
+
+<div class="movie-grid" *ngIf="!loading && movies.length > 0">
+    <div *ngFor="let movie of movies" class="movie-item">
+        <button (click)="toggleWatchlist(movie)" class="btn btn-watchlist">
+            {{ isInWatchlist(movie.id) ? 'Remove from Watchlist' : 'Add to Watchlist' }}
+        </button>
+
+        <a [routerLink]="['/movie', movie.id]" class="movie-link">
+            <div class="movie-card">
+                <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" [alt]="movie.title"
+                    class="movie-poster" />
+                <h3 class="movie-title">{{ movie.title }}</h3>
+                <p class="movie-year">{{ movie.release_date | date: 'yyyy' }}</p>
+                <p class="movie-rating">⭐ {{ movie.vote_average }}</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div *ngIf="!loading && movies.length === 0" class="no-results">
+    <p>No movies found. Try a different mood or search term.</p>
+</div>

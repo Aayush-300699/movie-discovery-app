@@ -1,0 +1,26 @@
+<div class="watchlist-container">
+    <h1 class="watchlist-title">🎬 My Watchlist</h1>
+
+    <div *ngIf="watchlist.length === 0" class="empty-message">
+        <p>Your watchlist is empty. Start adding some movies!</p>
+        <button routerLink="/" class="btn btn-primary">🔙 Back to Explore</button>
+    </div>
+
+    <div class="movie-grid" *ngIf="watchlist.length > 0">
+        <div *ngFor="let movie of watchlist" class="movie-item">
+            <button (click)="removeFromWatchlist(movie.id)" class="btn btn-watchlist">
+                ❌ Remove
+            </button>
+
+            <a [routerLink]="['/movie', movie.id]" class="movie-link">
+                <div class="movie-card">
+                    <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" [alt]="movie.title"
+                        class="movie-poster" />
+                    <h3 class="movie-title">{{ movie.title }}</h3>
+                    <p class="movie-year">{{ movie.release_date | date: 'yyyy' }}</p>
+                    <p class="movie-rating">⭐ {{ movie.vote_average }}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

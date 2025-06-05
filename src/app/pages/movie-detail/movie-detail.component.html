@@ -1,0 +1,38 @@
+<div *ngIf="loading">Loading movie details...</div>
+
+<div *ngIf="!loading && movie">
+    <h2>{{ movie.title }} ({{ movie.release_date | date:'yyyy' }})</h2>
+
+    <div class="movie-detail-container">
+        <img [src]="'https://image.tmdb.org/t/p/w300' + movie.poster_path" alt="poster" />
+
+        <div class="details">
+            <p><strong>Rating:</strong> ⭐ {{ movie.vote_average }}</p>
+            <p><strong>Overview:</strong> {{ movie.overview }}</p>
+            <p><strong>Release Date:</strong> {{ movie.release_date | date }}</p>
+
+            <div *ngIf="trailerKey" class="trailer">
+                <h3>Trailer</h3>
+                <iframe width="420" height="315" [src]="'https://www.youtube.com/embed/' + trailerKey | safeUrl"
+                    frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <div *ngIf="cast.length">
+                <h3>Cast</h3>
+                <ul>
+                    <li *ngFor="let actor of cast">{{ actor.name }} as {{ actor.character }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="similar.length">
+        <h3>Similar Movies</h3>
+        <div class="movie-grid">
+            <div *ngFor="let m of similar" class="movie-card">
+                <img [src]="'https://image.tmdb.org/t/p/w200' + m.poster_path" alt="poster" />
+                <h4>{{ m.title }}</h4>
+            </div>
+        </div>
+    </div>
+</div>

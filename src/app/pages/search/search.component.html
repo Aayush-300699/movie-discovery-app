@@ -1,0 +1,21 @@
+<h2>Search Movies</h2>
+
+<input [(ngModel)]="query" (keyup.enter)="search()" placeholder="Enter movie name..." />
+<button (click)="search()">Search</button>
+
+<div *ngIf="loading">Searching...</div>
+<div *ngIf="error">{{ error }}</div>
+
+<div *ngIf="!loading && results.length === 0 && query">No results found.</div>
+
+<div class="movie-grid" *ngIf="results.length">
+    <div *ngFor="let movie of results">
+        <a [routerLink]="['/movie', movie.id]">
+            <div class="movie-card">
+                <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="poster" />
+                <h3>{{ movie.title }}</h3>
+                <p>{{ movie.release_date | date: 'yyyy' }} | ⭐ {{ movie.vote_average }}</p>
+            </div>
+        </a>
+    </div>
+</div>
