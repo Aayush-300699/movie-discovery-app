@@ -1,59 +1,88 @@
-# MovieDiscoveryApp
+#  Movie Discovery App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+A sleek, modern Angular application that lets users explore popular movies, view detailed information, watch trailers, and discover similar titles – all powered by The Movie Database (TMDb) API.
 
-## Development server
+##  Features
 
-To start a local development server, run:
+-  **Search & Discover**: Browse trending, popular, and top-rated movies.
+-  **Movie Details**: View complete info including poster, synopsis, genres, release date, cast, and similar movies.
+-  **Top Cast**: See top-billed actors with their character names and profile images.
+-  **Watch Trailers**: Play official YouTube trailers directly.
+-  **Reusable Components**: Modular and reusable Angular components and pipes.
+-  **Fully Responsive**: Mobile-first, responsive layout using Angular’s latest features.
+-  **Safe Rendering**: Uses Angular's `SafeUrlPipe` for secure video embedding.
 
-```bash
-ng serve
-```
+##  Tech Stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Frontend**: Angular 17+ (standalone components)
+- **API**: [TMDb API](https://developers.themoviedb.org/)
+- **Routing**: Angular Router
+- **State Management**: Service-based data fetching with RxJS
+- **UI**: Custom SCSS + Angular directives (`NgIf`, `NgFor`)
+- **Pipes**: Custom `SafeUrlPipe` for video security
 
-## Code scaffolding
+##  Folder Structure
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+movie-discovery-app/
+├── src/
+│   ├── app/
+│   │   ├── core/
+│   │   │   ├── services/
+│   │   │   │   └── tmdb.service.ts
+│   │   ├── pages/
+│   │   │   ├── home/
+│   │   │   ├── movie-detail/
+│   │   │   ├── search/
+│   │   │   ├── watchlist/
+│   │   ├── services/
+│   │   │   ├── watchlist.service.ts/
+│   │   ├── shared/
+│   │   │   ├── pipes/
+│   │   │   │   └── safe-url.pipe.ts
+│   │   ├── app.config.ts
+│   │   ├── app.css
+│   │   ├── app.html
+│   │   ├── app.routes.ts
+│   │   └── app.specs.ts
+│   │   └── app.ts
+│   ├── environments/
+│   │   ├── environment.ts
+│   ├── index.html
+│   ├── main.ts
+│   ├── styles.scss
+├── angular.json
+├── package.json
+├── tsconfig.json
+├── README.md
+└── .gitignore
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+##  Setup Instructions
 
-```bash
-ng generate --help
-```
+1. **Clone the repository**  
+   `bash`
 
-## Building
+   git clone https://github.com/your-username/movie-discovery-app.git
+   cd movie-discovery-app
 
-To build the project run:
 
-```bash
-ng build
-```
+2. **Install dependencies** 
+    
+    npm install
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+3. **Configure TMDb API Key** 
 
-## Running unit tests
+    `Create a file: src/environments/environment.ts`
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+    export const environment = {
+      production: false,
+      tmdbApiKey: 'YOUR_TMDB_API_KEY'
+    };
 
-```bash
-ng test
-```
+4. **Run the app locally**  
 
-## Running end-to-end tests
+    ng serve
 
-For end-to-end (e2e) testing, run:
+##  Deployment
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+    ng build --configuration=production
